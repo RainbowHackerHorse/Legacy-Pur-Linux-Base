@@ -279,7 +279,7 @@ make
 make install
 
 # binutils pass 2
-# mkdir -v $PSRC/binutils-build ## extraneous mkdir
+mkdir -v $PSRC/binutils-build ## extraneous mkdir || NYET! ./purbuild.sh: line 285: cd: /home/bts/purroot/sources/binutils-build: No such file or directory
 cd $PSRC/binutils-2.25
 make distclean ## Maybe I didn't read over binutils README well enough, but any reason we're adding this?
 cd $PSRC/binutils-build
@@ -301,6 +301,7 @@ make -C ld LIB_PATH=/usr/lib:/lib
 cp -v ld/ld-new /tools/bin
 
 # GCC round 2
+cd ${PUR}/tools/lib
 cat gcc/limitx.h gcc/glimits.h gcc/limity.h > \
   `dirname $($PUR_TGT-gcc -print-libgcc-file-name)`/include-fixed/limits.h
 for file in \
