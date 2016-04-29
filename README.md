@@ -21,9 +21,9 @@ We are also the very FIRST Linux Distribution with plans to ship NTPsec rather t
 https://www.ntpsec.org/
 
 ## The Pür Linux Team
-* Rainbow - Project Director, BASE team lead, Packages Maintainer
-* Brent Saner - Git Wizard, Architecture Engineer, BASE Developer
-* James Stewart - Documentation team lead
+* Rainbow  - Project Director, BASE team lead, Packages Maintainer. https://twitter.com/hacker_horse
+* Brent Saner - Git Wizard, Architecture Engineer, BASE Developer.  https://twitter.com/sysadm_podcast
+* James Stewart - Documentation team lead. https://twitter.com/TheTechStewart
 
 ##Benefits of using Pür
 * No weird distro-specific changes to the file-system hierarchy: we use a standardized filesystem layout, similar to FreeBSD and traditional UNIX.
@@ -36,35 +36,39 @@ https://www.ntpsec.org/
 
 ## Plans
 
-Pür Linux will use an rc-style init system, similar to Slackware, rather than sysvinit or SystemD. /dev will likely be populated via eudev, Gentoo's udev fork.
+### Init
+We are looking at various init systems right now, as init is the last egg to crack before we're ready to start looking at pre-releases and tuning what packages we include in BASE.
+While we do not plan to make it technologically impossible to use systemd on Pür, there will be absolutely no support for such a configuration.
+Our current plans are to use an rc-like system, to better integrate with pkgsrc's rc scripts, however the project is open to suggestions from the community.
+
+### Other Stuff
 While we would like to include Clang/LLVM, due to the Linux kernel being reliant on GCC-specific tweaks right now, we will be including GCC in base, with Clang available via pkgsrc. Plans will be made to transition to Clang in base as soon as is feasible.
 
 ### Project Roadmap
-* April 2016 - Initial fork from CURRENT into 2016-STABLE
-* July 2016 - Fork from 2016-STABLE into 2016.07-RELENG
+* May 2016 - Initial fork from CURRENT into 2016-STABLE
 
 ## Development Branches
 Similar to FreeBSD, we currently maintain multiple branches. 
 * CURRENT - Bleeding edge. Where most of the work occurs. Constantly contains the latest versions of upstream.
 * STABLE - The current non-bleeding-edge development branch of the distribution. Currently, we plan yearly branch forks from CURRENT. The STABLE branch will keep up to date with stable upstream code, but major architectural changes, large software version leaps, and major GLibC updates are restricted to CURRENT. STABLE will be usable, however we suggest running a RELEASE image unless you're a developer or interested in development.
-* RELENG - Pür Linux's Release Engineering branch is where we stage work for release candidates. Additionally, Security updates are imported into this branch. No version increases occur in RELENG once it forks from STABLE. RELENG branches only exist to provide security updates to RELEASE, and EOL after 3 months.
+* RELENG - Pür Linux's Release Engineering branch is where we stage work for release candidates. Additionally, Security updates are imported into this branch, as well as swiching to a new STABLE branch of pkgsrc. No version increases occur in RELENG once it forks from STABLE. RELENG branches only exist to provide security updates to RELEASE, and EOL after 3 months.
 * RELEASE - The current stable release of Pür Linux. Releases are formatted as Year.Month-RELEASE, and are tagged out of the RELENG branch. Security updates are tagged with a U, and branched from STABLE. For example, 2016.07-RELEASE-U1 would be the first security update for 2016.07-RELEASE
 
 Due to the release schedule, Security Updates will only be supplied for a version until the next major version release.
-This means each major version has a 3 month lifecycle until EOL. You will not recieve any help for running an EOL version.
+This means each major version has a 3 month lifecycle until EOL. You will not receive any help for running an EOL version.
 
 ## Installation notes
 
 Please be aware of the following caveats:
 
 As we are using pkgsrc for installed packages, Pür Linux will be placing all installed packages inside the /usr/local directory, similar to FreeBSD. /bin, /sbin, /etc, /usr/bin, and /usr/sbin will only be used for Base utilities.
-As such, some scripts you download may require tweaking (We always suggest using the #!/usr/bin/env $shell shebang over hardcoded paths) to work on Pür Linux.
+As such, some scripts (primarily python and perl scripts where other distros have the interpreters in /usr/bin) you download may require tweaking (We always suggest using the #!/usr/bin/env $shell shebang over hardcoded paths) to work on Pür Linux.
 
 ## FAQ
 
 Q: So does pkgsrc update the whole system?
 
-A: Nope! Pür Linux breaks the traditional Linux paradigm of EVERYTHING IS A PACKAGE. I'm a FreeBSD sysadmin, and I really enjoy the separation between the Base system and 3rd party packages. While Pür Linux won't be developed in a single source tree like FreeBSD (Not much to develop folks. The goal is building and distributing Upstream code, remember?) there's still going to be separation between the Base OS (Pür Linux) and Ports (using pkgsrc)
+A: Nope! Pür Linux breaks the traditional Linux paradigm of EVERYTHING IS A PACKAGE. I'm a FreeBSD sysadmin, and I really enjoy the separation between the Base system and 3rd party packages. While Pür Linux won't be developed in a single source tree like FreeBSD (No desire nor need to fork much) there's still going to be separation between the Base OS (Pür Linux) and Ports (using pkgsrc)
 
 
 Q: You're just trying to make Linux like $BSD
@@ -75,7 +79,7 @@ I like having an OS be stable and secure and regularly released, with other pack
 
 Q: How are we sure no one tampered with anything?
 
-A: Well, as far as the distro itself, you have to trust me. Thing is, you do that with Ubuntu/CentOS/Slackware/Gentoo already anyway. As far as releases go, each release, as well as the source tarballs, will be signed via a minimum of two senior developers from the project, and checksummed.
+A: Well, as far as the distro itself, you have to trust me. Thing is, you do that with Ubuntu/CentOS/Slackware/Gentoo already anyway. And like them, everything we're doing is open and available, even our build system, so you can reproduce everything. As far as releases go, each release, as well as the source tarballs, will be signed via a minimum of two senior developers from the project, and checksummed.
 
 Q: I wanna send you a message. Wat Do.
 
@@ -83,9 +87,9 @@ A: Email rainbow@purlinux.org
 
 My PGP key is 0x5F94763A
 
-You can also just hit me up on Twitter. I'm Hacker_Horse there.
+You can also just hit me up on Twitter. https://twitter.com/hacker_horse
 
-You can also follow @PurLinux or email info@purlinux.org
+You can also follow https://twitter.com/PurLinux or email info@purlinux.org
 
 Q: IRC?
 
@@ -97,9 +101,8 @@ Q: Primary Project Master repo?
 A: On Github, the primary master repo is at https://github.com/PurLinux/Base 
 
 The original repo was located at https://github.com/RainbowHackerHorse/Pur-Linux/ now https://github.com/RainbowHackerHorse/Pur-Linux-Base/tree/Legacy
-Legacy will not be updated, however https://github.com/RainbowHackerHorse/Pur-Linux-Base/ is where my (Rainbow's) contributions are developed before being merged into the upstream Base repo.
 
-Other people may have forks. 
+Other people may have their own forks. 
 
 Q: How do I build the distro?
 
